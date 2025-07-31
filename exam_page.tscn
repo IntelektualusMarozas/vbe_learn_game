@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://daroytbl7v7ql"]
+
+[ext_resource type="Script" uid="uid://c74rtg61jkap8" path="res://ExamManager.gd" id="1_m8nna"]
+
+[node name="exam_page" type="Node2D"]
+script = ExtResource("1_m8nna")

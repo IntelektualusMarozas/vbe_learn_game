@@ -1,0 +1,29 @@
+{
+  "egzamino_pavadinimas": "2025 m. Matematikos VBE (Bandomasis)",
+  "dalykas": "matematika",
+  "klausimai": [
+	{
+	  "id": "mat_alg_001",
+	  "tema": "Algebra",
+	  "tipas": "vienas_pasirinkimas",
+	  "klausimo_tekstas": "Kiek yra $2 + 2 \\times 2$?",
+	  "pasirinkimai": ["6", "8", "4"],
+	  "atsakymas": "4"
+	},
+	{
+	  "id": "mat_geo_001",
+	  "tema": "Geometrija",
+	  "tipas": "atviras_skaitinis",
+	  "klausimo_tekstas": "Apskaičiuokite stačiojo trikampio, kurio statiniai yra 3 cm ir 4 cm, įžambinės ilgį (cm).",
+	  "atsakymas": "5"
+	},
+	{
+	  "id": "mat_log_002",
+	  "tema": "Logika",
+	  "tipas": "keli_pasirinkimai",
+	  "klausimo_tekstas": "Kurie iš šių skaičių yra pirminiai?",
+	  "pasirinkimai": ["2", "4", "7", "9"],
+	  "atsakymas": ["2", "7"]
+	}
+  ]
+}
