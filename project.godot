@@ -13,4 +13,7 @@ config_version=5
 config/name="VBE_Learn_Game"
 run/main_scene="uid://daroytbl7v7ql"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+
+[autoload]
+
+ExamManager="*res://ExamManager.gd"
