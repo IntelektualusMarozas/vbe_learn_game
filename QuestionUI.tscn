@@ -11,6 +11,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bt01t")
 
-[node name="QuestionTextLabel" type="Node" parent="."]
+[node name="QuestionTextLabel" type="Label" parent="."]
+layout_mode = 0
 
-[node name="AnswerOptionsContainer" type="Node" parent="."]
+[node name="AnswerOptionsContainer" type="VBoxContainer" parent="."]
+layout_mode = 0

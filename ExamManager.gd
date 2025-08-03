@@ -26,7 +26,7 @@ func show_current_question():
 		
 		question_instance.answer_selected.connect(_on_user_answered)
 		
-		add_child(question_instance)
+		get_tree().current_scene.add_child(question_instance)
 
 func _on_user_answered(user_answer):
 	var correct_answer = all_questions[current_question_index].atsakymas
