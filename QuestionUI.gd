@@ -2,10 +2,11 @@ extends Control
 
 signal answer_selected(selected_answer)
 
-@onready var question_text_label = $QuestionTextLabel
-@onready var answer_options_container = $AnswerOptionsContainer
-
 func display_question(question_data):
+	
+	var question_text_label = $QuestionTextLabel
+	var answer_options_container = $AnswerOptionsContainer
+	
 	question_text_label.text = question_data.klausimo_tekstas
 	
 	for child in answer_options_container.get_children():
