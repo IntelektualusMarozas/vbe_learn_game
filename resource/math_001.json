@@ -17,6 +17,14 @@
 	  "klausimo_tekstas": "Kiek yra 18 / 2?",
 	  "pasirinkimai": ["BBZ", "9", "4"],
 	  "atsakymas": "9"
+	},
+	{
+	  "id": "mat_log_001",
+	  "tema": "Logika",
+	  "tipas": "keli_pasirinkimai",
+	  "klausimo_tekstas": "Kurie iš šių skaičių yra pirminiai?",
+	  "pasirinkimai": ["2", "4", "7", "9"],
+	  "atsakymas": ["2", "7"]
 	}
   ]
 }

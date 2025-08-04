@@ -30,7 +30,21 @@ func show_current_question():
 
 func _on_user_answered(user_answer, question_scene):
 	var correct_answer = all_questions[current_question_index].atsakymas
-	if user_answer == correct_answer:
+	var is_correct = false
+	
+	if typeof(user_answer) == TYPE_ARRAY:
+		
+		user_answer.sort()
+		correct_answer.sort()
+		if user_answer == correct_answer:
+			is_correct = true
+	else:
+		if user_answer == correct_answer:
+			is_correct = true
+			#TO DO: nature of such open question could be complex to implement. 
+			#Need to think about the ways how to implement properly
+	
+	if is_correct:
 		print("ATSAKYMAS TEISINGAS!")
 		score += 1
 	else:
