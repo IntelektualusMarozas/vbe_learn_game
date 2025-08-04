@@ -27,11 +27,6 @@ func show_current_question():
 		question_instance.answer_selected.connect(_on_user_answered.bind(question_instance))
 		
 		get_tree().current_scene.add_child(question_instance)
-	else:
-		#Once exam is finished
-		print("--- Egzaminas Baigtas! ---")
-		print("Galutinis rezultas: ", score, " iš ", all_questions.size())
-		get_tree().quit()
 
 func _on_user_answered(user_answer, question_scene):
 	var correct_answer = all_questions[current_question_index].atsakymas
@@ -43,4 +38,13 @@ func _on_user_answered(user_answer, question_scene):
 	
 	question_scene.queue_free()
 	current_question_index += 1
-	show_current_question()
+	
+	if current_question_index < all_questions.size():
+		show_current_question()
+	else:
+		#Once exam is finished
+		print("--- Egzaminas Baigtas! ---")
+		print("Galutinis rezultas: ", score, " iš ", all_questions.size())
+		await get_tree().create_timer(1.0).timeout
+		get_tree().quit()
+	
