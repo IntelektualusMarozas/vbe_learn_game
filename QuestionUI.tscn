@@ -15,6 +15,7 @@ script = ExtResource("1_bt01t")
 layout_mode = 1
 offset_right = 158.0
 offset_bottom = 62.0
+mouse_filter = 0
 
 [node name="QuestionTextLabel" type="Label" parent="MainContainer"]
 layout_mode = 2
@@ -25,5 +26,4 @@ alignment = 1
 
 [node name="SubmitButton" type="Button" parent="MainContainer"]
 layout_mode = 2
-button_mask = 0
 text = "===PATVIRTINTI==="
