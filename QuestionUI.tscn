@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://5rdylvfvlnug"]
+[gd_scene load_steps=2 format=3 uid="uid://5rdylvfvlnug"]
 
 [ext_resource type="Script" uid="uid://dri43cxvsrb4t" path="res://QuestionUI.gd" id="1_bt01t"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_bt01t"]
 
 [node name="QuestionUI" type="Control"]
 layout_mode = 3
@@ -23,7 +21,9 @@ layout_mode = 0
 
 [node name="SubmitButton" type="Button" parent="."]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 153.0
+offset_bottom = 81.0
 button_mask = 0
-icon = SubResource("ViewportTexture_bt01t")
+text = "*Patvirtinti*"

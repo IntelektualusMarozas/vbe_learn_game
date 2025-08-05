@@ -32,17 +32,18 @@ func display_question(question_data):
 					var check_box = CheckBox.new()
 					check_box.text = option_text
 					answer_options_container.add_child(check_box)
-					
-	if question_data.has("pasirinkimai"):
-		for option_text in question_data.pasirinkimai:
-			var button = Button.new()
-			button.text = option_text
-			button.pressed.connect(_on_answer_button_pressed.bind(option_text))
-			answer_options_container.add_child(button)
 			
 func _on_answer_button_pressed(answer_text):
 	print("Vartotojas pasirinko: ", answer_text)
 	answer_selected.emit(answer_text)
 
 func _on_submit_multiple_choice():
-	return 0
+	var selected_options = []
+	var answer_options_container = $AnswerOptionsContainer
+	
+	for child in answer_options_container.get_children():
+		if child is CheckBox and child.button_pressed:
+			selected_options.append(child.text)
+			
+	print("Vartotojas pasirinko:", selected_options)
+	answer_selected.emit(selected_options)
