@@ -2,10 +2,13 @@ extends Control
 
 signal answer_selected(selected_answer)
 
+func _ready():
+	$MainContainer/SubmitButton.pressed.connect(_on_submit_multiple_choice)
+
 func display_question(question_data):
-	var question_text_label = $QuestionTextLabel
-	var answer_options_container = $AnswerOptionsContainer
-	var submit_button = $SubmitButton
+	var question_text_label = $MainContainer/QuestionTextLabel
+	var answer_options_container = $MainContainer/AnswerOptionsContainer
+	var submit_button = $MainContainer/SubmitButton
 	
 	question_text_label.text = question_data.klausimo_tekstas
 	submit_button.visible = false
@@ -25,7 +28,7 @@ func display_question(question_data):
 					
 	elif question_type == "keli_pasirinkimai":
 		submit_button.visible = true
-		submit_button.pressed.connect(_on_submit_multiple_choice)	
+		#submit_button.pressed.connect(_on_submit_multiple_choice)	
 	
 		if question_data.has("pasirinkimai"):
 			for option_text in question_data.pasirinkimai:
@@ -39,7 +42,7 @@ func _on_answer_button_pressed(answer_text):
 
 func _on_submit_multiple_choice():
 	var selected_options = []
-	var answer_options_container = $AnswerOptionsContainer
+	var answer_options_container = $MainContainer/AnswerOptionsContainer
 	
 	for child in answer_options_container.get_children():
 		if child is CheckBox and child.button_pressed:
