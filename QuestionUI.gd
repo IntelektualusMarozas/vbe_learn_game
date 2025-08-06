@@ -2,16 +2,24 @@ extends Control
 
 signal answer_selected(selected_answer)
 
+var current_question_type = ""
+
 func _ready():
 	$MainContainer/SubmitButton.pressed.connect(_on_submit_multiple_choice)
 
 func display_question(question_data):
 	var question_text_label = $MainContainer/QuestionTextLabel
 	var answer_options_container = $MainContainer/AnswerOptionsContainer
+	var answer_line_edit = $MainContainer/AnswerLineEdit
 	var submit_button = $MainContainer/SubmitButton
 	
+	current_question_type = question_data.tipas
+	
 	question_text_label.text = question_data.klausimo_tekstas
+	
 	submit_button.visible = false
+	answer_line_edit.visible = false
+	answer_line_edit.clear()
 	
 	for child in answer_options_container.get_children():
 		child.queue_free()
@@ -35,18 +43,28 @@ func display_question(question_data):
 					var check_box = CheckBox.new()
 					check_box.text = option_text
 					answer_options_container.add_child(check_box)
+					
+	elif current_question_type == "atviras_klausimas":
+		submit_button.visible = true
+		answer_line_edit.visible = true
 			
 func _on_answer_button_pressed(answer_text):
 	print("Vartotojas pasirinko: ", answer_text)
 	answer_selected.emit(answer_text)
 
 func _on_submit_multiple_choice():
-	var selected_options = []
-	var answer_options_container = $MainContainer/AnswerOptionsContainer
+	if current_question_type == "keli_pasirinkimai":
+		var selected_options = []
+		var answer_options_container = $MainContainer/AnswerOptionsContainer
+		
+		for child in answer_options_container.get_children():
+			if child is CheckBox and child.button_pressed:
+				selected_options.append(child.text)
+				
+		print("Vartotojas pasirinko:", selected_options)
+		answer_selected.emit(selected_options)
 	
-	for child in answer_options_container.get_children():
-		if child is CheckBox and child.button_pressed:
-			selected_options.append(child.text)
-			
-	print("Vartotojas pasirinko:", selected_options)
-	answer_selected.emit(selected_options)
+	elif current_question_type == "atviras_klausimas":
+		var answer_text = $MainContainer/AnswerLineEdit.text
+		print("Vartotojas pasirinko: ", answer_text)
+		answer_selected.emit(answer_text)
