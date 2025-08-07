@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="VBE_Learn_Game"
-run/main_scene="uid://daroytbl7v7ql"
+run/main_scene="uid://cecyyy8xmxkyf"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [autoload]
