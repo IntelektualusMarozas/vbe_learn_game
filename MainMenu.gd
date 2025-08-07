@@ -6,7 +6,8 @@ func _ready():
 	$VBoxContainer/Exit.pressed.connect(_on_exit_button_pressed)
 
 func _on_start_button_pressed():
-	get_tree().change_scene_to_file("res://ExamPage.tscn")
+	#get_tree().change_scene_to_file("res://ExamPage.tscn")
+	ExamManager.start_exam()
 
 func _on_options_button_pressed():
 	print("Options, TBU")

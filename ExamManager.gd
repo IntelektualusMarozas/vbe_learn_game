@@ -8,6 +8,15 @@ var results = []
 var question_start_time = 0
 
 func _ready():
+	pass
+
+func start_exam():
+	current_question_index = 0
+	results.clear()
+	
+	get_tree().change_scene_to_file("res://ExamPage.tscn")
+	await get_tree().tree_changed
+	
 	var file = FileAccess.open("res://resource/math_001.json", FileAccess.READ)
 	var content = JSON.parse_string(file.get_as_text())
 	
