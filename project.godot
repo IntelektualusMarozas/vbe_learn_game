@@ -17,3 +17,4 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 [autoload]
 
 ExamManager="*res://ExamManager.gd"
+SettingsManager="*res://SettingsManager.gd"

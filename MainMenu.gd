@@ -10,8 +10,8 @@ func _on_start_button_pressed():
 	#ExamManager.start_exam()
 
 func _on_options_button_pressed():
-	print("Options, TBU")
-	pass
+	print("Options")
+	get_tree().change_scene_to_file("res://Options.tscn")
 
 func _on_exit_button_pressed():
 	print("Goodbye")

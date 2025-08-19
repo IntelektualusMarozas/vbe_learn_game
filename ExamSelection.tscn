@@ -21,4 +21,4 @@ layout_mode = 2
 
 [node name="BackButton" type="Button" parent="MainContainer"]
 layout_mode = 2
-text = "Grįžti į meniu"
+text = "GRĮŠTI Į MENIU"
