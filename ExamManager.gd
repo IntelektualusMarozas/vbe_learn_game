@@ -10,14 +10,28 @@ var question_start_time = 0
 func _ready():
 	pass
 
-func start_exam():
+func get_available_exams():
+	var exams = []
+	var dir = DirAccess.open("res://resource")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".json"):
+				exams.append(dir.get_current_dir() + "/" + file_name)
+			file_name = dir.get_next()
+	else:
+			print("Could not find the 'resource' directory.")
+	return exams
+
+func start_exam(exam_filepath):
 	current_question_index = 0
 	results.clear()
 	
 	get_tree().change_scene_to_file("res://ExamPage.tscn")
 	await get_tree().tree_changed
 	
-	var file = FileAccess.open("res://resource/math_001.json", FileAccess.READ)
+	var file = FileAccess.open(exam_filepath, FileAccess.READ)
 	var content = JSON.parse_string(file.get_as_text())
 	
 	if content:

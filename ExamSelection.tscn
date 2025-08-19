@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceg6qxjp6s3xs"]
+
+[ext_resource type="Script" uid="uid://dwxkjsfy8thv5" path="res://ExamSelection.gd" id="1_x52sn"]
+
+[node name="ExamSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x52sn")
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ExamListContainer" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MainContainer"]
+layout_mode = 2
+text = "Grįžti į meniu"
