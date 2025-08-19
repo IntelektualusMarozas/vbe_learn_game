@@ -98,5 +98,6 @@ func display_final_results():
 	else:
 		print("Sveikiname! Visi atsakymai teisingi!")
 	
-	await get_tree().create_timer(1.0).timeout
-	get_tree().quit()
+	await get_tree().create_timer(3.0).timeout
+	get_tree().change_scene_to_file("res://MainMenu.tscn")
+	#get_tree().quit()
