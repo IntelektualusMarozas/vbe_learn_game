@@ -1,5 +1,7 @@
 extends Node
 
+signal feedback_provided(message, is_correct)
+
 const QuestionUIScene = preload("res://QuestionUI.tscn")
 
 var all_questions = []
@@ -70,11 +72,17 @@ func _on_user_answered(user_answer, question_scene):
 			#TO DO: nature of such open question could be complex to implement. 
 			#Need to think about the ways how to implement properly
 	
-	if is_correct:
-		print("ATSAKYMAS TEISINGAS!")
-		#score += 1
-	else:
-		print("ATSAKYMAS NETEISINGAS. Teisingas atsakymas: ", correct_answer)
+	if SettingsManager.show_instant_feedback:	
+		var feedback_message = ""
+		if is_correct:
+			feedback_message = "ATSAKYMAS TEISINGAS!"
+			print(feedback_message)
+			#score += 1
+		else:
+			feedback_message = "NETEISINGAS. Teisingas atsakymas: %s" % str(correct_answer)
+			print(feedback_message)
+		
+		feedback_provided.emit(feedback_message, is_correct)
 	
 	results.append({
 		"id": all_questions[current_question_index].id,
