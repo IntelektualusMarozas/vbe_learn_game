@@ -4,8 +4,24 @@ signal answer_selected(selected_answer)
 
 var current_question_type = ""
 
+@onready var feedback_label = $MainContainer/FeedbackLabel
+@onready var feedback_timer = $FeedbackTimer
+
 func _ready():
 	$MainContainer/SubmitButton.pressed.connect(_on_submit_multiple_choice)
+	feedback_timer.timeout.connect(_on_feedback_timer_timeout)
+
+func show_feedback(message, is_correct):
+	feedback_label.text = message
+	if is_correct:
+		feedback_label.modulate = Color.GREEN
+	else:
+		feedback_label.modulate = Color.DARK_RED
+	feedback_label.show()
+	feedback_timer.start()
+	
+func _on_feedback_timer_timeout():
+	feedback_label.hide()
 
 func display_question(question_data):
 	var question_text_label = $MainContainer/QuestionTextLabel

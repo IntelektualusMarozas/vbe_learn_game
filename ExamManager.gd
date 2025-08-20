@@ -1,6 +1,6 @@
 extends Node
 
-signal feedback_provided(message, is_correct)
+#signal feedback_provided(message, is_correct)
 
 const QuestionUIScene = preload("res://QuestionUI.tscn")
 
@@ -53,7 +53,8 @@ func show_current_question():
 	question_instance.display_question(question_data)
 	question_instance.answer_selected.connect(_on_user_answered.bind(question_instance))
 	
-	get_tree().current_scene.add_child(question_instance)
+	#get_tree().current_scene.add_child(question_instance)
+	get_tree().current_scene.get_node("QuestionPlaceholder").add_child(question_instance)
 
 func _on_user_answered(user_answer, question_scene):
 	var time_taken = (Time.get_ticks_msec() - question_start_time) / 1000.0
@@ -76,13 +77,17 @@ func _on_user_answered(user_answer, question_scene):
 		var feedback_message = ""
 		if is_correct:
 			feedback_message = "ATSAKYMAS TEISINGAS!"
-			print(feedback_message)
+			#print(feedback_message)
 			#score += 1
 		else:
-			feedback_message = "NETEISINGAS. Teisingas atsakymas: %s" % str(correct_answer)
+			var correct_answer_str = str(all_questions[current_question_index].atsakymas)
+			feedback_message = "NETEISINGAS. Teisingas atsakymas: %s" % correct_answer_str
 			print(feedback_message)
 		
-		feedback_provided.emit(feedback_message, is_correct)
+		question_scene.show_feedback(feedback_message, is_correct)
+		
+		await get_tree().create_timer(2.0).timeout
+		#feedback_provided.emit(feedback_message, is_correct)
 	
 	results.append({
 		"id": all_questions[current_question_index].id,
