@@ -76,7 +76,9 @@ func _on_user_answered(user_answer, question_scene):
 	results.append({
 		"id": all_questions[current_question_index].id,
 		"is_correct": is_correct,
-		"time_taken": time_taken
+		"time_taken": time_taken,
+		"user_answer": user_answer,
+		"correct_answer": correct_answer
 	})
 	
 	if SettingsManager.show_instant_feedback:	
@@ -105,7 +107,7 @@ func _on_user_answered(user_answer, question_scene):
 
 func display_final_results():
 	print("--- Egzaminas Baigtas! ---")
-	
+	"""
 	var final_score = 0
 	var difficult_questions = []
 	
@@ -126,4 +128,5 @@ func display_final_results():
 	
 	await get_tree().create_timer(3.0).timeout
 	get_tree().change_scene_to_file("res://MainMenu.tscn")
-	#get_tree().quit()
+	"""
+	get_tree().change_scene_to_file("res://ResultScreen.tscn")
