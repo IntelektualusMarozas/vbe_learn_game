@@ -1,6 +1,6 @@
 extends Node
 
-#signal feedback_provided(message, is_correct)
+signal feedback_provided(message, is_correct)
 
 const QuestionUIScene = preload("res://QuestionUI.tscn")
 
