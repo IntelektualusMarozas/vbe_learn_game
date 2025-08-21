@@ -1,6 +1,6 @@
 extends Node
 
-signal feedback_provided(message, is_correct)
+#signal feedback_provided(message, is_correct)
 
 const QuestionUIScene = preload("res://QuestionUI.tscn")
 
@@ -53,12 +53,12 @@ func show_current_question():
 	question_instance.display_question(question_data)
 	question_instance.answer_selected.connect(_on_user_answered.bind(question_instance))
 	
-	#get_tree().current_scene.add_child(question_instance)
-	get_tree().current_scene.get_node("QuestionPlaceholder").add_child(question_instance)
+	get_tree().current_scene.add_child(question_instance)
+	#get_tree().current_scene.get_node("QuestionPlaceholder").add_child(question_instance)
 
 func _on_user_answered(user_answer, question_scene):
-	var time_taken = (Time.get_ticks_msec() - question_start_time) / 1000.0
 	
+	var time_taken = (Time.get_ticks_msec() - question_start_time) / 1000.0
 	var correct_answer = all_questions[current_question_index].atsakymas
 	var is_correct = false
 	
@@ -73,6 +73,12 @@ func _on_user_answered(user_answer, question_scene):
 			#TO DO: nature of such open question could be complex to implement. 
 			#Need to think about the ways how to implement properly
 	
+	results.append({
+		"id": all_questions[current_question_index].id,
+		"is_correct": is_correct,
+		"time_taken": time_taken
+	})
+	
 	if SettingsManager.show_instant_feedback:	
 		var feedback_message = ""
 		if is_correct:
@@ -85,16 +91,9 @@ func _on_user_answered(user_answer, question_scene):
 			print(feedback_message)
 		
 		question_scene.show_feedback(feedback_message, is_correct)
-		
 		await get_tree().create_timer(2.0).timeout
 		#feedback_provided.emit(feedback_message, is_correct)
-	
-	results.append({
-		"id": all_questions[current_question_index].id,
-		"is_correct": is_correct,
-		"time_taken": time_taken
-	})
-	
+		
 	question_scene.queue_free()
 	current_question_index += 1
 	

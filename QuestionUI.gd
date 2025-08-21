@@ -53,13 +53,11 @@ func display_question(question_data):
 	elif question_type == "keli_pasirinkimai":
 		submit_button.visible = true
 		#submit_button.pressed.connect(_on_submit_multiple_choice)	
-	
 		if question_data.has("pasirinkimai"):
 			for option_text in question_data.pasirinkimai:
 					var check_box = CheckBox.new()
 					check_box.text = option_text
 					answer_options_container.add_child(check_box)
-					
 	elif current_question_type == "atviras_klausimas":
 		submit_button.visible = true
 		answer_line_edit.visible = true
@@ -69,6 +67,7 @@ func _on_answer_button_pressed(answer_text):
 	answer_selected.emit(answer_text)
 
 func _on_submit_multiple_choice():
+	
 	if current_question_type == "keli_pasirinkimai":
 		var selected_options = []
 		var answer_options_container = $MainContainer/AnswerOptionsContainer
@@ -76,10 +75,8 @@ func _on_submit_multiple_choice():
 		for child in answer_options_container.get_children():
 			if child is CheckBox and child.button_pressed:
 				selected_options.append(child.text)
-				
 		print("Vartotojas pasirinko:", selected_options)
 		answer_selected.emit(selected_options)
-	
 	elif current_question_type == "atviras_klausimas":
 		var answer_text = $MainContainer/AnswerLineEdit.text
 		print("Vartotojas pasirinko: ", answer_text)
