@@ -11,6 +11,13 @@ func _ready():
 	$MainContainer/SubmitButton.pressed.connect(_on_submit_multiple_choice)
 	feedback_timer.timeout.connect(_on_feedback_timer_timeout)
 
+func set_inputs_disabled(is_disabled):
+	$MainContainer/SubmitButton.disabled = is_disabled
+	$MainContainer/AnswerLineEdit.editable = not is_disabled
+	
+	for child in $MainContainer/AnswerOptionsContainer.get_children():
+		child.disabled = is_disabled
+
 func show_feedback(message, is_correct):
 	feedback_label.text = message
 	if is_correct:
@@ -30,7 +37,6 @@ func display_question(question_data):
 	var submit_button = $MainContainer/SubmitButton
 	
 	current_question_type = question_data.tipas
-	
 	question_text_label.text = question_data.klausimo_tekstas
 	
 	submit_button.visible = false
@@ -64,9 +70,11 @@ func display_question(question_data):
 			
 func _on_answer_button_pressed(answer_text):
 	print("Vartotojas pasirinko: ", answer_text)
+	set_inputs_disabled(true)
 	answer_selected.emit(answer_text)
 
 func _on_submit_multiple_choice():
+	set_inputs_disabled(true)
 	
 	if current_question_type == "keli_pasirinkimai":
 		var selected_options = []
