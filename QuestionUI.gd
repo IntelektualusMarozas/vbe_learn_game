@@ -32,12 +32,25 @@ func _on_feedback_timer_timeout():
 
 func display_question(question_data):
 	var question_text_label = $MainContainer/QuestionTextLabel
+	var question_image_rect = $MainContainer/QuestionImage
 	var answer_options_container = $MainContainer/AnswerOptionsContainer
 	var answer_line_edit = $MainContainer/AnswerLineEdit
 	var submit_button = $MainContainer/SubmitButton
 	
 	current_question_type = question_data.tipas
-	question_text_label.text = question_data.klausimo_tekstas
+	#question_text_label.text = question_data.klausimo_tekstas
+	
+	if question_data.has("klausimo_tekstas"):
+		question_text_label.text = question_data.klausimo_tekstas
+		question_text_label.visible = true
+	else:
+		question_text_label.visible = false
+	
+	if question_data.has("klausimo_paveikslelis"):
+		question_image_rect.texture = load(question_data.klausimo_paveikslelis)
+		question_image_rect.visible = true
+	else:
+		question_image_rect.visible = false
 	
 	submit_button.visible = false
 	answer_line_edit.visible = false
@@ -46,24 +59,36 @@ func display_question(question_data):
 	for child in answer_options_container.get_children():
 		child.queue_free()
 		
-	var question_type = question_data.tipas
+	var choices_are_images = question_data.get("pasirinkimai_yra_paveiksleliai", false)
 
-	if question_type == "vienas_pasirinkimas":
+	if current_question_type == "vienas_pasirinkimas":
 		if question_data.has("pasirinkimai"):
-				for option_text in question_data.pasirinkimai:
+				for option in question_data.pasirinkimai:
 					var button = Button.new()
-					button.text = option_text
-					button.pressed.connect(_on_answer_button_pressed.bind(option_text))
+					if choices_are_images:
+						button.icon = load(option)
+					else:
+						button.text = option
+					button.pressed.connect(_on_answer_button_pressed.bind(option))
 					answer_options_container.add_child(button)
 					
-	elif question_type == "keli_pasirinkimai":
+	elif current_question_type == "keli_pasirinkimai":
 		submit_button.visible = true
-		#submit_button.pressed.connect(_on_submit_multiple_choice)	
 		if question_data.has("pasirinkimai"):
-			for option_text in question_data.pasirinkimai:
-					var check_box = CheckBox.new()
-					check_box.text = option_text
-					answer_options_container.add_child(check_box)
+			for option in question_data.pasirinkimai:
+				var check_box = CheckBox.new()
+				if choices_are_images:
+					#For CheckBox you cannot directly load image
+					check_box.text = ""
+					var texture_rect = TextureRect.new()
+					texture_rect.texture = load(option)
+					texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+					texture_rect.custom_minimum_size = Vector2(100, 100)
+					check_box.add_child(texture_rect)
+				else:
+					check_box.text = option
+				answer_options_container.add_child(check_box)
+		
 	elif current_question_type == "atviras_klausimas":
 		submit_button.visible = true
 		answer_line_edit.visible = true
