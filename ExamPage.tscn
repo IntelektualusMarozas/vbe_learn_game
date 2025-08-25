@@ -5,19 +5,21 @@
 
 [node name="ExamPage" type="Node2D"]
 
-[node name="HelpButton" type="Button" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HelpButton" type="Button" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1089.0
-offset_top = 16.0
-offset_right = 1609.0
-offset_bottom = 536.0
+offset_left = -69.9999
+offset_top = 17.0
+offset_right = 450.0
+offset_bottom = 537.0
 grow_horizontal = 0
 scale = Vector2(0.1, 0.1)
 action_mode = 0
 icon = ExtResource("1_bds5d")
 
-[node name="HelpPopup" parent="." instance=ExtResource("2_8iua2")]
+[node name="HelpPopup" parent="CanvasLayer" instance=ExtResource("2_8iua2")]
 offset_left = 1200.0
 offset_right = 1286.0
