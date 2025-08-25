@@ -1,3 +1,23 @@
-[gd_scene format=3 uid="uid://b1g5u03snsqkd"]
+[gd_scene load_steps=3 format=3 uid="uid://b1g5u03snsqkd"]
+
+[ext_resource type="Texture2D" uid="uid://ca1ytifwpbyen" path="res://images/doc_icon.png" id="1_bds5d"]
+[ext_resource type="PackedScene" uid="uid://dp1ef2kdr8p7f" path="res://HelpPopup.tscn" id="2_8iua2"]
 
 [node name="ExamPage" type="Node2D"]
+
+[node name="HelpButton" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1089.0
+offset_top = 16.0
+offset_right = 1609.0
+offset_bottom = 536.0
+grow_horizontal = 0
+scale = Vector2(0.1, 0.1)
+action_mode = 0
+icon = ExtResource("1_bds5d")
+
+[node name="HelpPopup" parent="." instance=ExtResource("2_8iua2")]
+offset_left = 1200.0
+offset_right = 1286.0
