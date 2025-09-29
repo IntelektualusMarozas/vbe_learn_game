@@ -11,15 +11,11 @@
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -69.9999
-offset_top = 17.0
-offset_right = 450.0
-offset_bottom = 537.0
+offset_left = -520.0
+offset_bottom = 520.0
 grow_horizontal = 0
 scale = Vector2(0.1, 0.1)
 action_mode = 0
 icon = ExtResource("1_bds5d")
 
 [node name="HelpPopup" parent="CanvasLayer" instance=ExtResource("2_8iua2")]
-offset_left = 1200.0
-offset_right = 1286.0
